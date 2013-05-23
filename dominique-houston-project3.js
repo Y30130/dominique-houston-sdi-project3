@@ -23,53 +23,58 @@ We will offer a free download after your ticket purchase. (String Function)
 var performingArtists = {
 	"artists": [
 		{
-			"artistFirstName": "Britney",
-			"artistLastName" : "Spears"
+			"artistName": "Britney Spears"
 		},
+		
 		{
-			"artistFirstName": "Christina",
-			"artistLastName" : "Aguilera"
+			"artistName": "Christina Aguilera"
 		},
+		
 		{
-			"artistFirstName": "Beyonce",
-			"artistLastName" : "Knowles"
+			"artistName": "Beyonce"
 		}
 	]
 };
-
 // Tour Details
-var tourDetails = [
+var tourDetails = {
+	"tours": [
 		{
-		"name" : "Oops I Did It Again Tour", 
-		"shows": "90", 
+		"artistName": "Britney Spears",
+		"tourName" : "\"Oops I Did It Again Tour\"", 
+		"shows": "90",
+		"legs": "2",
 		"year" : "2000",
 		"worldTour" : "true",
 		"debutTour" : "false"
 		},
 
 		{
-		"name" : "Christina Aguilera in Concert", 
-		"shows": "81", 
+		"artistName": "Christina Aguilera",
+		"tourName" : "\"Christina Aguilera in Concert\"", 
+		"shows": "81",
+		"legs" : "4",
 		"year" : "2000",
 		"worldTour" : "true",
 		"debutTour" : "true"
 		},
 
 		{
-		"name" : "The Beyonce Experience", 
+		"artistName": "Beyonce",
+		"tourName" : "\"The Beyonce Experience\"", 
 		"shows": "97", 
+		"legs" : "5",
 		"year" : "2007",
 		"worldTour" : "true",
 		"debutTour" : "false"
 		}
-]
+		]
+};
+
 
 // My Global variables
-var recordingArtist = "Britney Spears";
-var showsPerMonth = 1;
-var songsPerShow = 6;
-var showDurationMins = 30;
-var weeksPerforming = 12;
+var performingArtist = performingArtists.artists[0].artistName;
+var tourDetailsName = tourDetails.tours[0].tourName;
+var tourDetailsYear = tourDetails.tours[0].year;
 var monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 var showsBooked = true;
 var soldOut = true;
@@ -83,32 +88,50 @@ var seasons = ["Winter","Spring","Summer","Fall"];
 var say = function(message) {console.log(message);}
 
 // My procedure 
-if (recordingArtist == "Britney Spears") {
-	say(recordingArtist + " is going on tour!");
+if (performingArtist == "Britney Spears") {
+	var tourName = tourDetails.tours[0].tourName;
+	say("The queen, " + performingArtist + ", is going on tour!");
 	say("");
-} 
-else {
-	console.log("We do not have information for that artist.");
-};
+	say(performingArtist + " headlined her first world tour " + tourName + " in " + tourDetailsYear + ".");
+	say("");		
+	}
+	
+if (performingArtist == "Christina Aguilera") {
+	var tourName = tourDetails.tours[1].tourName;
+	say(performingArtist + " is going on to pussy pop on tour!");
+	say("");
+	say(performingArtist + " headlined her first world tour " + tourName + " in " + tourDetailsYear + ".");
+	say("");	
+	}
+if (performingArtist == "Beyonce") {
+	var tourName = tourDetails.tours[2].tourName;
+	say(performingArtist + " is going on tour!");
+	say("");
+	say(performingArtist + " headlined her first world tour " + tourName + " in " + tourDetailsYear + ".");
+	say("");	
+}
+
+
 
 
 // My Boolean Function
 // Determine if concert tickets are avaiable
 var checkShowStatus = function(inCity,showsBooked) {
-	var verifiedShow = showsBooked && soldOut;
+	verifiedShow = (showsBooked && soldOut);
 	if (inCity && showsBooked) {
-		say("Congratulations! " + recordingArtist + " concert tickets are available for purchase.");
+		say("Congratulations! " + performingArtist + " concert tickets are available for purchase.");
 		say("");
-		return verifiedShow;
+		return true;
 	}
 	if (inCity || showsBooked) {
-		say("Regretfully, concert tickets for " + recordingArtist + " are available, but not in your area. Please try another location.");
+		say("Regretfully, concert tickets for " + performingArtists + " are available, but not in your area. Please try another location.");
 		return false;
 	}
 	if (!showsBooked && !inCity){
-		say("We do not have any shows booked for " + recordingArtist + ".");
+		say("We do not have any shows booked for " + performingArtist + ".");
 		return false;
 	}
+	return verifiedShow;
 }
 
 //
@@ -122,7 +145,7 @@ var showCountdown = function (shows) {
 	while (shows > 0) {
 		shows = shows - 1;
 		if (shows > 0) {
-			say( recordingArtist +", that was a great show.");
+			say( performingArtist +", that was a great show.");
 			say(shows + " left on the tour.");
 			if (shows == 1) {
 			say("");
@@ -130,7 +153,7 @@ var showCountdown = function (shows) {
 				}
 		} 
 		else {
-			say("We have reached the end of the tour. 	" + recordingArtist +" sends thanks!");
+			say("We have reached the end of the tour. 	" + performingArtist +" sends thanks!");
 		}
 		say(" ");
 	
@@ -142,9 +165,9 @@ var showCountdown = function (shows) {
 // My array function + For Loop
 // 
 var showCountUp = function(weeksPerforming,monthsOfTheYear) {
-	var showNumber = monthsOfTheYear.push("Nevember");
+	showNumber = monthsOfTheYear.push("Nevember");
 	for (var i = 0; i < monthsOfTheYear.length; i++){
-		say(recordingArtist + " will be performing " + weeksPerforming + " show this " + monthsOfTheYear[i] + ".");
+		say(performingArtist + " will be performing " + weeksPerforming + " show this " + monthsOfTheYear[i] + ".");
 		
 		if (i > monthsOfTheYear) {
 			say("There are still upcoming performances.");
@@ -155,12 +178,41 @@ var showCountUp = function(weeksPerforming,monthsOfTheYear) {
 }
 
 // String function
-
 var offerDownload = function(freeSong,freeVideo) {
-	var downloadMessage = "Download " + freeSong + " or " + freeVideo + " for free.";
 	
+if (performingArtist == "Britney Spears") {
+		freeSong = "Ooh La La";
+		freeVideo = "Scream & Shout";
+	}
+if (performingArtist == "Christina Aguilera") {
+		freeSong = "Feel This Moment";
+		freeVideo = "Your Body";
+	}
+if (performingArtist == "Beyonce") {
+		freeSong = "Grown Woman";
+		freeVideo = "Grown Woman (Live From Paris)";
+	}	
+	downloadMessage = "Download " + freeSong + " (audio) and " + freeVideo + " (video) for free.";	
 	return downloadMessage;
 	}
+
+// Concert Summary (Object Function + Accesor & Mutator)
+var concertSummary = {  
+		"avgCrowdSize"       : "50,000",
+		"showDuration"    : "90",
+		"songsPerShow"	  : "15",
+		"songDuration"    : function() { // Method: Accessor
+			var minsPerSong = this.showDuration / this.songsPerShow;
+			return minsPerSong;
+		},
+		
+		"setDuration"    : function(newDuration)
+		{ // Method: Mutator
+			this.showDuration = newDuration;
+			return concertSummary.showDuration;		
+		}
+};
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -168,10 +220,16 @@ var offerDownload = function(freeSong,freeVideo) {
 checkShowStatus(true,true); // Boolean Function (toggle values to output different results)
 showCountdown(12); // Number Function & While Loop
 showCountUp(1,monthsOfTheYear); // Array Function & For Loop
-offerDownload("Ooh La La","Scream & Shout");
+offerDownload("Ooh La La","Scream & Shout"); // String Function 
+
 
 // Returned Values
 say("It is " + verifiedShow + " that the show has been verified in your area."); // Returned Value from Boolean Function
+say("");
 say("There will be " + showNumber + " shows total."); // Returned Numerical Value from my Array Loop
+say("");
 say("With the addition of the new month, there will be " + showNumber + " shows."); // Returned Value from my For While Loop
+say("");
+say("The average duration of each song performed will be " + concertSummary.songDuration());
+say("");
 say(downloadMessage); // Returned Value from String Function
