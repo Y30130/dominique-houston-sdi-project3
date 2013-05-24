@@ -6,18 +6,6 @@
 // Javascript Freestyle
 /*
 
-A recording artist var recordingArist = "Britney Spears" is going on tour and will be performing one secret show per month for one year. showsPerYear = 12. monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].
-
-Currently Britney Spears is the only artist doing such tour, so if you provide any other artist name, we will not be able to fully assist you at this time if (recordingAritst == "Britney Spears"). We will need to verify that she is going to be near the location you provide, and also check to see if tickets are still availble. (Boolean function)
-
-For each month that has passed, the number of shows left will decrease. (Number function and while loop)
-
-We will itemize each month and the number of shows she will perform to clear up any confusion. (Array function and For Loop)
-
-We believe in taking chances, so we have create a new month "Nevember" to celebrate the release of Britney's new album. (Array Function and For Loop)
-
-We will offer a free download after your ticket purchase. (String Function)
-
 */
 // JSON
 var performingArtists = {
