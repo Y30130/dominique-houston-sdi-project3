@@ -73,8 +73,9 @@ var tourDetails = {
 
 // My Global variables
 var performingArtist = performingArtists.artists[0].artistName; // Toggle Object Index Number to output different results
-var tourDetailsName = tourDetails.tours[0].tourName;
-var tourDetailsYear = tourDetails.tours[0].year;
+var tourDetailsName = tourDetails.tours[0].tourName; // Toggle Object Index Number to output different results
+var tourDetailsYear = tourDetails.tours[0].year; // Toggle Object Index Number to output different results
+var tourDetailsShows = tourDetails.tours[0].shows; // Toggle Object Index Number to output different results
 var monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 var showsBooked = true;
 var soldOut = true;
@@ -87,26 +88,31 @@ var seasons = ["Winter","Spring","Summer","Fall"];
 // Convert Consolge Log into it's on Function, "Say"
 var say = function(message) {console.log(message);}
 
-// Performing Artist Message
+// Procedure 
+if (onTour == true) {
+	say(performingArtist + " tour information is available:");
+	say("");
+} else {
+	say(performingArtist + " tour information is not available.");
+	return;
+}
+
+
+// Performing Artist Message (String Function)
 if (performingArtist == "Britney Spears") {
 	var tourName = tourDetails.tours[0].tourName;
-	say("The queen, " + performingArtist + ", is going on tour!");
-	say("");
 	say(performingArtist + " headlined her first world tour " + tourName + " in " + tourDetailsYear + ".");
 	say("");		
 	}
 	
 if (performingArtist == "Christina Aguilera") {
 	var tourName = tourDetails.tours[1].tourName;
-	say(performingArtist + " is going on to pussy pop on tour!");
-	say("");
 	say(performingArtist + " headlined her first world tour " + tourName + " in " + tourDetailsYear + ".");
 	say("");	
 	}
+	
 if (performingArtist == "Beyonce") {
 	var tourName = tourDetails.tours[2].tourName;
-	say(performingArtist + " is going on tour!");
-	say("");
 	say(performingArtist + " headlined her first world tour " + tourName + " in " + tourDetailsYear + ".");
 	say("");	
 }
@@ -119,16 +125,16 @@ if (performingArtist == "Beyonce") {
 var checkShowStatus = function(inCity,showsBooked) {
 	verifiedShow = (showsBooked && soldOut);
 	if (inCity && showsBooked) {
-		say("Congratulations! " + performingArtist + " concert tickets are available for purchase.");
+		say(performingArtist + " concert tickets were available for purchase in " + tourDetailsYear + ".");
 		say("");
 		return true;
 	}
 	if (inCity || showsBooked) {
-		say("Regretfully, concert tickets for " + performingArtists + " are available, but not in your area. Please try another location.");
+		say("Regretfully, concert tickets for " + performingArtists + " were available, but not in your area.");
 		return false;
 	}
 	if (!showsBooked && !inCity){
-		say("We do not have any shows booked for " + performingArtist + ".");
+		say("There were no shows booked for " + performingArtist + ".");
 		return false;
 	}
 	return verifiedShow;
@@ -138,39 +144,35 @@ var checkShowStatus = function(inCity,showsBooked) {
 // My number function + While Loop
 // Loop and count down how many concerts are left
 var showCountdown = function (shows) {
-	var countShows = shows - 1;
+	var shows = tourDetailsShows - 1;
 	
-	say("The tour begins today. We have a total of " + shows + " shows.");
+	say("When the tour began there was a total of " + shows + " shows.");
 	say("");
 	while (shows > 0) {
 		shows = shows - 1;
 		if (shows > 0) {
-			say( performingArtist +", that was a great show.");
+			say("I remember hearing " + performingArtist +", that was a great show.");
 			say(shows + " left on the tour.");
-			if (shows == 1) {
-			say("");
-					say("This is the last show. Hope you've got your tickets!");
-				}
 		} 
 		else {
-			say("We have reached the end of the tour. 	" + performingArtist +" sends thanks!");
+			say("We have reached the end of the tour. " + performingArtist +" sends thanks!");
 		}
 		say(" ");
 	
 	}
-	return countShows;
+	return shows;
 }
 
 //
 // My array function + For Loop
 // 
-var showCountUp = function(weeksPerforming,monthsOfTheYear) {
-	showNumber = monthsOfTheYear.push("Nevember");
-	for (var i = 0; i < monthsOfTheYear.length; i++){
-		say(performingArtist + " will be performing " + weeksPerforming + " show this " + monthsOfTheYear[i] + ".");
+var showCountUp = function(weeksPerforming,shows) {
+	showNumber = tourDetails.tours[0].shows;
+	for (var i = 0; i < tourDetails.tours[0].shows; i++){
+		say(performingArtist + " performed a show.");
 		
-		if (i > monthsOfTheYear) {
-			say("There are still upcoming performances.");
+		if (i > shows) {
+			say("There were still upcoming performances.");
 		}
 		say(" ");
 	}
@@ -198,7 +200,7 @@ if (performingArtist == "Beyonce") {
 
 // Concert Summary (Object Function + Accesor & Mutator)
 var concertSummary = {  
-		"avgCrowdSize"       : "50,000",
+		"avgCrowdSize"    : "50,000",
 		"showDuration"    : "90",
 		"songsPerShow"	  : "15",
 		"songDuration"    : function() { // Method: Accessor
@@ -218,18 +220,21 @@ var concertSummary = {
 
 // Function Execution
 checkShowStatus(true,true); // Boolean Function (toggle values to output different results)
-showCountdown(12); // Number Function & While Loop
+showCountdown(tourDetails.tours[0].shows); // Number Function & While Loop | Toggle to match index of recording artist -- would like to know how to make this automatic
 showCountUp(1,monthsOfTheYear); // Array Function & For Loop
 offerDownload("Ooh La La","Scream & Shout"); // String Function 
 concertSummary.songDuration();
+concertSummary.setDuration(90);
 
 // Returned Values
-say("It is " + verifiedShow + " that the show has been verified in your area."); // Returned Value from Boolean Function
+say("It is " + verifiedShow + " that the show was in your area."); // Returned Value from Boolean Function
 say("");
 say("There will be " + showNumber + " shows total."); // Returned Numerical Value from my Array Loop
 say("");
-say("With the addition of the new month, there will be " + showNumber + " shows."); // Returned Value from my For While Loop
+say("There was a total of " + showNumber + " shows."); // Returned Value from my For While Loop
 say("");
 say("The average duration of each song performed will be " + minsPerSong + " minutes.");
 say("");
 say(downloadMessage); // Returned Value from String Function
+say("");
+say(concertSummary.showDuration); // Mutated Value
