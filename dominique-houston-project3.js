@@ -72,7 +72,7 @@ var tourDetails = {
 
 
 // My Global variables
-var performingArtist = performingArtists.artists[0].artistName;
+var performingArtist = performingArtists.artists[0].artistName; // Toggle Object Index Number to output different results
 var tourDetailsName = tourDetails.tours[0].tourName;
 var tourDetailsYear = tourDetails.tours[0].year;
 var monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -87,7 +87,7 @@ var seasons = ["Winter","Spring","Summer","Fall"];
 // Convert Consolge Log into it's on Function, "Say"
 var say = function(message) {console.log(message);}
 
-// My procedure 
+// Performing Artist Message
 if (performingArtist == "Britney Spears") {
 	var tourName = tourDetails.tours[0].tourName;
 	say("The queen, " + performingArtist + ", is going on tour!");
@@ -202,7 +202,7 @@ var concertSummary = {
 		"showDuration"    : "90",
 		"songsPerShow"	  : "15",
 		"songDuration"    : function() { // Method: Accessor
-			var minsPerSong = this.showDuration / this.songsPerShow;
+			minsPerSong = this.showDuration / this.songsPerShow;
 			return minsPerSong;
 		},
 		
@@ -221,7 +221,7 @@ checkShowStatus(true,true); // Boolean Function (toggle values to output differe
 showCountdown(12); // Number Function & While Loop
 showCountUp(1,monthsOfTheYear); // Array Function & For Loop
 offerDownload("Ooh La La","Scream & Shout"); // String Function 
-
+concertSummary.songDuration();
 
 // Returned Values
 say("It is " + verifiedShow + " that the show has been verified in your area."); // Returned Value from Boolean Function
@@ -230,6 +230,6 @@ say("There will be " + showNumber + " shows total."); // Returned Numerical Valu
 say("");
 say("With the addition of the new month, there will be " + showNumber + " shows."); // Returned Value from my For While Loop
 say("");
-say("The average duration of each song performed will be " + concertSummary.songDuration());
+say("The average duration of each song performed will be " + minsPerSong + " minutes.");
 say("");
 say(downloadMessage); // Returned Value from String Function
